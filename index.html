@@ -1,23 +1,481 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#070816"><meta name="description" content="OpenSource(OS) Orbit — your weekly view of the open-source universe."><meta property="og:title" content="OpenSource(OS) Orbit"><meta property="og:description" content="Discover projects, radar signals, and events shaping software."><title>OpenSource(OS) Orbit · Weekly Signal</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#070816">
+<meta name="description" content="OpenSource(OS) Orbit — a weekly open-source signal digest inspired by Trendshift's Weekly Update.">
+<title>OpenSource(OS) Orbit</title>
 <style>
-:root{--bg:#070816;--ink:#f7f8ff;--muted:#a7aec8;--line:#ffffff1c;--cyan:#73e7ff;--mint:#a7ffd2;--purple:#a98cff;--pink:#ff76bd;--gold:#ffd773;--glass:#ffffff0b;--shadow:0 30px 90px #0008}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:var(--ink);font:15px/1.6 Inter,ui-sans-serif,system-ui,sans-serif;background:radial-gradient(circle at 10% 0,#293b86 0,transparent 32%),radial-gradient(circle at 95% 20%,#075052 0,transparent 28%),var(--bg);overflow-x:hidden}body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.12;background-image:linear-gradient(#fff 1px,transparent 1px),linear-gradient(90deg,#fff 1px,transparent 1px);background-size:72px 72px;mask-image:linear-gradient(#000,transparent 78%)}a{color:inherit;text-decoration:none}.shell{width:min(1180px,92%);margin:auto}.topbar{position:sticky;top:0;z-index:20;background:#070816cc;border-bottom:1px solid var(--line);backdrop-filter:blur(22px)}.nav{height:74px;display:flex;align-items:center;justify-content:space-between;gap:20px}.brand{display:flex;align-items:center;gap:10px;font-weight:950;letter-spacing:.04em}.logo{width:18px;height:18px;border-radius:50%;background:linear-gradient(135deg,var(--cyan),var(--mint));box-shadow:0 0 24px var(--cyan);position:relative}.logo:after{content:"";position:absolute;inset:-6px;border:1px solid var(--cyan);border-radius:50%}.navlinks{display:flex;gap:20px;color:var(--muted);font-weight:750}.navlinks a:hover{color:var(--cyan)}.btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;border:1px solid var(--line);border-radius:999px;padding:12px 18px;background:var(--glass);color:var(--ink);font-weight:850;cursor:pointer;transition:.25s}.btn:hover{transform:translateY(-3px);border-color:var(--cyan);box-shadow:0 10px 30px #73e7ff22}.primary{border:0;color:#06101c;background:linear-gradient(110deg,var(--cyan),var(--mint));box-shadow:0 12px 35px #73e7ff55}.hero{display:grid;grid-template-columns:1.1fr .9fr;gap:22px;padding:78px 0 35px;perspective:1200px}.glass{border:1px solid var(--line);border-radius:30px;background:linear-gradient(145deg,#1a2342dd,#0b0e20dd);box-shadow:var(--shadow);backdrop-filter:blur(18px)}.hero-copy{padding:48px;position:relative;overflow:hidden}.hero-copy:after{content:"";position:absolute;width:460px;height:460px;right:-270px;bottom:-290px;border-radius:50%;background:radial-gradient(circle,#73e7ff66,transparent 64%)}.eyebrow{display:inline-flex;align-items:center;gap:8px;padding:7px 12px;border-radius:99px;border:1px solid #a7ffd255;background:#a7ffd211;color:var(--mint);font-size:11px;font-weight:900;letter-spacing:.1em;text-transform:uppercase}.eyebrow i{width:7px;height:7px;border-radius:50%;background:var(--mint);box-shadow:0 0 14px var(--mint)}h1{font-size:clamp(46px,6.5vw,82px);line-height:.95;letter-spacing:-.08em;margin:20px 0 0}.shine{background:linear-gradient(105deg,var(--cyan),var(--mint) 54%,var(--purple));color:transparent;background-clip:text}.lead{max-width:650px;color:var(--muted);font-size:18px;margin:25px 0}.actions{display:flex;gap:11px;flex-wrap:wrap}.meta{display:flex;gap:18px;flex-wrap:wrap;color:var(--muted);font-size:13px;margin-top:25px}.orbit{min-height:395px;padding:25px;position:relative;overflow:hidden;transform-style:preserve-3d}.orbit:before,.orbit:after{content:"";position:absolute;border:1px solid #73e7ff55;border-radius:50%;left:9%;right:9%;top:23%;bottom:13%;transform:rotate(-22deg)}.orbit:after{left:20%;right:20%;top:34%;bottom:24%;transform:rotate(34deg)}.core{position:absolute;z-index:2;left:50%;top:54%;transform:translate(-50%,-50%);width:108px;height:108px;border-radius:50%;display:grid;place-items:center;text-align:center;font-size:12px;font-weight:950;background:radial-gradient(circle at 30% 22%,#fff,var(--cyan) 14%,#6654d4 55%,#18133e);box-shadow:0 0 80px #73e7ffdd;animation:pulse 3s ease-in-out infinite}.node{position:absolute;z-index:3;display:grid;place-items:center;width:44px;height:44px;border-radius:50%;font-size:10px;font-weight:950;background:#131831;border:1px solid var(--cyan);box-shadow:0 0 22px #73e7ff77;animation:float 4s ease-in-out infinite}.n1{left:11%;top:29%}.n2{right:11%;top:20%;border-color:var(--mint);animation-delay:.7s}.n3{left:16%;bottom:18%;border-color:var(--gold);animation-delay:1.2s}.n4{right:15%;bottom:23%;border-color:var(--purple);animation-delay:1.8s}@keyframes pulse{50%{box-shadow:0 0 110px #73e7ffff;transform:translate(-50%,-50%) scale(1.04)}}@keyframes float{50%{transform:translateY(-10px)}}.ticker{display:flex;gap:16px;overflow:hidden;color:var(--muted);font-size:12px;margin:4px 0 15px}.ticker b{color:var(--mint);white-space:nowrap}section{padding:30px 0}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.stat{padding:22px;border:1px solid var(--line);border-radius:20px;background:var(--glass)}.stat strong{display:block;color:var(--cyan);font-size:33px;line-height:1}.stat span{display:block;color:var(--muted);font-size:13px;margin-top:8px}.head{margin-bottom:19px}.head h2{margin:0;font-size:35px;letter-spacing:-.055em}.head p{color:var(--muted);margin:5px 0}.toolbar{display:flex;gap:10px;margin-bottom:17px}.toolbar input,.toolbar select,.comment input{width:100%;padding:13px 15px;border:1px solid var(--line);border-radius:13px;background:#0b1025;color:var(--ink);outline:none}.toolbar input:focus,.toolbar select:focus,.comment input:focus{border-color:var(--cyan);box-shadow:0 0 0 3px #73e7ff18}.grid,.charts,.radar,.events{display:grid;gap:17px}.grid{grid-template-columns:repeat(3,1fr)}.card{padding:22px;border:1px solid var(--line);border-radius:22px;background:linear-gradient(145deg,#161e3be8,#0b0f22e8);transition:.3s;transform-style:preserve-3d}.card:hover{transform:translateY(-7px) rotateX(2deg) rotateY(-2deg);border-color:#73e7ff99;box-shadow:0 24px 55px #0007}.card-top{display:flex;justify-content:space-between;gap:12px}.rank{font-size:22px;font-weight:950;color:var(--gold)}.card h3{margin:5px 0;font-size:21px}.muted{color:var(--muted)}.tags{display:flex;gap:5px;flex-wrap:wrap;margin:14px 0}.tag{display:inline-flex;padding:4px 8px;border-radius:99px;border:1px solid #73e7ff44;background:#73e7ff10;color:var(--cyan);font-size:10px;font-weight:850}.use{margin:15px 0;padding:12px;border-left:3px solid var(--mint);border-radius:9px;background:#a7ffd20c}.links{display:flex;align-items:center;gap:13px;flex-wrap:wrap;color:var(--cyan);font-size:13px;font-weight:850}.links a:hover{text-decoration:underline}.charts{grid-template-columns:1fr 1fr}.barline{display:grid;grid-template-columns:112px 1fr 40px;gap:9px;align-items:center;margin:14px 0;font-size:13px}.bar{height:9px;border-radius:99px;background:#1c2b4e;overflow:hidden}.bar i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,var(--purple),var(--cyan),var(--mint))}.radar{grid-template-columns:repeat(4,1fr)}.ring{min-height:215px}.ring h3{margin:0 0 10px}.ring ul{margin:0;padding-left:18px;color:var(--muted)}.adopt{border-color:#a7ffd288}.trial{border-color:#73e7ff88}.assess{border-color:#a98cff88}.hold{border-color:#ff76bd88}.events{grid-template-columns:repeat(3,1fr)}.date{color:var(--gold);font-size:12px;font-weight:900}.comment{display:flex;gap:10px;margin-top:17px}.comments{display:grid;gap:8px;margin-top:12px;color:var(--muted);font-size:13px}.comment-item{padding:9px 11px;border:1px solid var(--line);border-radius:10px}.empty{text-align:center;color:var(--muted);padding:30px;grid-column:1/-1}.reveal{opacity:0;transform:translateY(35px);transition:opacity .8s ease,transform .8s ease}.reveal.visible{opacity:1;transform:none}.footer{padding:46px 0 65px;margin-top:35px;border-top:1px solid var(--line);text-align:center;color:var(--muted)}@media(max-width:980px){.grid{grid-template-columns:repeat(2,1fr)}.radar{grid-template-columns:1fr 1fr}}@media(max-width:800px){.hero,.charts{grid-template-columns:1fr}.events{grid-template-columns:1fr}.stats{grid-template-columns:1fr 1fr}.navlinks{display:none}}@media(max-width:560px){.hero-copy{padding:30px 22px}.grid,.radar{grid-template-columns:1fr}.toolbar{display:block}.toolbar>*{margin-bottom:9px}h1{font-size:51px}.barline{grid-template-columns:95px 1fr 35px}}@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}.reveal{opacity:1;transform:none}}
-</style></head>
+:root{
+  --bg:#070816;
+  --bg-2:#0d1225;
+  --panel:#121a2e;
+  --panel-strong:#171f35;
+  --ink:#f7f8ff;
+  --muted:#a7aec8;
+  --line:#ffffff1c;
+  --cyan:#73e7ff;
+  --mint:#a7ffd2;
+  --purple:#a98cff;
+  --pink:#ff76bd;
+  --gold:#ffd773;
+  --glass:rgba(255,255,255,.04);
+  --shadow:0 30px 90px rgba(0,0,0,.45);
+  --success:#60f1ae;
+  --warning:#ffd773;
+  --danger:#ff8ca6;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  font-family:Inter,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+  background:
+    radial-gradient(circle at top left, rgba(115,231,255,.12), transparent 28%),
+    radial-gradient(circle at top right, rgba(169,140,255,.14), transparent 24%),
+    linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 100%);
+  color:var(--ink);
+  min-height:100vh;
+}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+button,input{font:inherit}
+.shell{max-width:1200px;margin:0 auto;padding:0 24px}
+.topbar{
+  position:sticky;top:0;z-index:20;
+  background:rgba(7,8,22,.72);
+  backdrop-filter:blur(18px);
+  border-bottom:1px solid rgba(255,255,255,.08)
+}
+.nav{
+  display:flex;align-items:center;justify-content:space-between;
+  min-height:72px;gap:18px
+}
+.brand{
+  display:inline-flex;align-items:center;gap:12px;
+  font-weight:800;letter-spacing:-.04em;color:var(--ink)
+}
+.logo{
+  width:12px;height:12px;border-radius:50%;
+  background:linear-gradient(135deg,var(--cyan),var(--purple));
+  box-shadow:0 0 22px rgba(115,231,255,.8)
+}
+.navlinks{display:flex;align-items:center;gap:18px;color:var(--muted);font-size:.95rem}
+.navlinks a{transition:color .2s ease}
+.navlinks a:hover{color:var(--ink)}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;
+  gap:8px;padding:12px 18px;border-radius:999px;
+  border:1px solid var(--line);background:rgba(255,255,255,.02);
+  color:var(--ink);font-weight:700;transition:.2s ease
+}
+.btn:hover{transform:translateY(-1px);border-color:rgba(255,255,255,.2)}
+.btn.primary{
+  background:linear-gradient(135deg, rgba(115,231,255,.18), rgba(169,140,255,.18));
+  border-color:rgba(115,231,255,.5)
+}
+main{padding-bottom:64px}
+.hero{padding:64px 0 18px}
+.hero-grid{
+  display:grid;grid-template-columns:1.45fr .75fr;gap:26px;align-items:stretch
+}
+.hero-copy,.hero-panel,.card{
+  background:var(--glass);border:1px solid var(--line);
+  border-radius:24px;box-shadow:var(--shadow)
+}
+.hero-copy{padding:32px 28px 24px}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:8px 12px;border-radius:999px;background:rgba(255,255,255,.03);
+  border:1px solid var(--line);font-size:.8rem;text-transform:uppercase;letter-spacing:.12em;
+  color:var(--muted)
+}
+.eyebrow i{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--mint);box-shadow:0 0 18px rgba(167,255,210,.85)}
+.hero h1{
+  margin:18px 0 16px;font-size:clamp(2.8rem, 6vw, 5.2rem);line-height:.95;letter-spacing:-.07em;font-weight:900
+}
+.shine{
+  display:inline-block;padding:0 .08em;background:linear-gradient(90deg,var(--cyan),var(--purple),var(--pink));
+  -webkit-background-clip:text;background-clip:text;color:transparent
+}
+.hero-copy p{
+  margin:0;color:var(--muted);font-size:1.06rem;line-height:1.7;max-width:62ch
+}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px}
+.hero-panel{padding:22px 20px}
+.panel-label{
+  margin-bottom:18px;color:var(--muted);font-size:.75rem;letter-spacing:.12em;text-transform:uppercase
+}
+.leader-list{display:grid;gap:12px}
+.leader-row{
+  display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;
+  padding:12px 12px;border-radius:16px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06)
+}
+.leader-rank{
+  width:34px;height:34px;border-radius:12px;display:grid;place-items:center;
+  background:linear-gradient(135deg,rgba(115,231,255,.22),rgba(169,140,255,.22));
+  font-weight:800;color:var(--ink)
+}
+.leader-name{font-weight:800;letter-spacing:-.03em}
+.leader-meta{display:block;font-size:.72rem;color:var(--muted);margin-top:2px}
+.rank-up{font-weight:800;color:var(--success)}
+.ticker{
+  display:flex;flex-wrap:wrap;align-items:center;gap:10px;justify-content:center;
+  margin:18px 0 28px;padding:12px 16px;border:1px solid var(--line);border-radius:999px;
+  background:rgba(255,255,255,.02);color:var(--muted);font-size:.82rem;letter-spacing:.14em;text-transform:uppercase
+}
+.ticker b{color:var(--ink);letter-spacing:.06em}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px;margin-top:8px}
+.stat{
+  padding:20px 18px;border-radius:20px;background:rgba(255,255,255,.02);border:1px solid var(--line)
+}
+.stat strong{display:block;font-size:clamp(1.6rem,3vw,2.4rem);letter-spacing:-.06em;font-weight:900}
+.stat span{color:var(--muted);font-size:.9rem}
+section{padding:22px 0}
+.head{
+  display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:18px
+}
+.head h2{margin:0;font-size:clamp(1.7rem,3vw,2.5rem);letter-spacing:-.05em}
+.head p{margin:0;color:var(--muted);max-width:60ch}
+.toolbar{
+  display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;
+  margin-bottom:16px;padding:12px 14px;border-radius:18px;background:rgba(255,255,255,.02);border:1px solid var(--line)
+}
+.search-wrap{
+  flex:1;display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.08);
+  border-radius:12px;padding:10px 12px;min-width:220px;max-width:420px
+}
+.search-wrap span{color:var(--muted)}
+.search-wrap input{
+  width:100%;border:none;outline:none;background:transparent;color:var(--ink)
+}
+.search-wrap input::placeholder{color:var(--muted)}
+.legend{color:var(--muted);font-size:.82rem}
+.project-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
+.card{padding:18px}
+.project-card{position:relative;overflow:hidden;display:flex;flex-direction:column;min-height:240px}
+.project-card::before{
+  content:"";position:absolute;inset:0 auto auto 0;width:100%;height:2px;
+  background:linear-gradient(90deg,var(--cyan),var(--purple),var(--pink));
+}
+.project-top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.project-name{font-size:1.35rem;font-weight:800;letter-spacing:-.04em}
+.project-area{color:var(--muted);font-size:.78rem;letter-spacing:.12em;text-transform:uppercase}
+.score-badge{
+  display:inline-flex;align-items:center;justify-content:center;
+  min-width:62px;padding:8px 10px;border-radius:12px;
+  background:rgba(167,255,210,.12);border:1px solid rgba(167,255,210,.22);font-weight:800;color:var(--success)
+}
+.project-tags{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0}
+.tag{
+  padding:6px 9px;border-radius:999px;border:1px solid var(--line);color:var(--muted);
+  background:rgba(255,255,255,.02);font-size:.74rem
+}
+.project-card p{margin:0;color:var(--muted);line-height:1.7}
+.project-meta{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:auto;padding-top:12px}
+.project-meta .reason{color:var(--gold);font-size:.74rem;letter-spacing:.08em;text-transform:uppercase}
+.charts{display:grid;grid-template-columns:1.2fr .8fr;gap:18px}
+.chart-card .bars{display:grid;gap:14px;margin-top:18px}
+.bar-row{display:grid;grid-template-columns:120px 1fr 38px;gap:10px;align-items:center;font-size:.9rem}
+.bar-row .label{color:var(--muted)}
+.bar-track{height:10px;border-radius:999px;background:rgba(255,255,255,.04);overflow:hidden;border:1px solid rgba(255,255,255,.06)}
+.bar-fill{display:block;height:100%;border-radius:inherit;background:linear-gradient(90deg,var(--cyan),var(--purple),var(--pink))}
+.list{list-style:none;padding:0;margin:18px 0 0;display:grid;gap:14px}
+.list li{padding:14px 0;border-bottom:1px solid rgba(255,255,255,.06);color:var(--muted);line-height:1.7}
+.list li:last-child{border-bottom:none}
+.list strong{color:var(--ink)}
+.radar{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
+.ring{min-height:180px}
+.ring h3{margin:0 0 12px;font-size:1.3rem;letter-spacing:-.04em}
+.ring p{margin:0;color:var(--muted);line-height:1.7}
+.ring.adopt{border-color:rgba(96,241,174,.32);background:linear-gradient(180deg,rgba(96,241,174,.07),rgba(255,255,255,.02))}
+.ring.trial{border-color:rgba(115,231,255,.3);background:linear-gradient(180deg,rgba(115,231,255,.07),rgba(255,255,255,.02))}
+.ring.assess{border-color:rgba(169,140,255,.3);background:linear-gradient(180deg,rgba(169,140,255,.07),rgba(255,255,255,.02))}
+.ring.hold{border-color:rgba(255,118,189,.28);background:linear-gradient(180deg,rgba(255,118,189,.07),rgba(255,255,255,.02))}
+.events{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.event-card .date{display:inline-block;padding:8px 10px;border-radius:10px;background:rgba(255,255,255,.03);border:1px solid var(--line);font-size:.8rem;color:var(--muted);margin-bottom:12px}
+.event-card h3{margin:0 0 10px;font-size:1.2rem;letter-spacing:-.03em}
+.event-card p{margin:0;color:var(--muted);line-height:1.7}
+.community .card{padding:22px}
+.community-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:16px;align-items:center}
+.community-copy p{margin:0;color:var(--muted);line-height:1.7}
+.like-box{display:flex;align-items:center;justify-content:center;gap:14px;padding:18px;border-radius:18px;background:rgba(255,255,255,.02);border:1px solid var(--line)}
+#like{min-width:172px}
+#like span{font-weight:800}
+.footer{
+  padding:28px 0 48px;border-top:1px solid rgba(255,255,255,.08);margin-top:24px;background:rgba(255,255,255,.01)
+}
+.footer .shell{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.footer b{font-size:1.1rem}
+.footer p{margin:8px 0 0;color:var(--muted)}
+.reveal{opacity:1;transform:none}
+@media (max-width:900px){
+  .hero-grid,.charts,.community-grid,.events,.radar{grid-template-columns:1fr}
+  .stats{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .head{display:block}
+  .head p{margin-top:8px}
+}
+@media (max-width:640px){
+  .nav{flex-wrap:wrap;padding:12px 0}
+  .navlinks{width:100%;justify-content:space-between;font-size:.82rem}
+  .shell{padding:0 16px}
+  .hero-copy,.hero-panel,.card{border-radius:18px}
+  .hero-copy{padding:22px 18px 18px}
+  .stats{grid-template-columns:1fr}
+  .toolbar{padding:10px 12px}
+  .search-wrap{max-width:none}
+}
+</style>
+</head>
 <body>
-<header class="topbar"><nav class="shell nav"><a class="brand" href="#top"><i class="logo"></i>OpenSource(OS) Orbit</a><div class="navlinks"><a href="#projects">Discover</a><a href="#radar">Radar</a><a href="#events">Events</a><a href="#community">Community</a></div><button class="btn primary" id="share">↗ Share Orbit</button></nav></header>
+<header class="topbar">
+  <nav class="shell nav">
+    <a class="brand" href="#top"><i class="logo"></i>OpenSource(OS) Orbit</a>
+    <div class="navlinks">
+      <a href="#projects">Discover</a>
+      <a href="#radar">Radar</a>
+      <a href="#events">Events</a>
+      <a href="https://trendshift.io/weekly" target="_blank" rel="noreferrer">Trendshift Weekly</a>
+    </div>
+  </nav>
+</header>
 <main id="top" class="shell">
-<section class="hero reveal"><div class="glass hero-copy"><span class="eyebrow"><i></i> Weekly signal · 2026 / Week 38</span><h1>Find what’s next in the <span class="shine">open-source universe.</span></h1><p class="lead">The fast, visual weekly guide to projects, use cases, technology movements, and events worth your attention.</p><div class="actions"><a class="btn primary" href="#projects">Explore the signal ↓</a><a class="btn" href="#radar">Open tech radar</a></div><div class="meta"><span>✦ Curated every week</span><span>◉ Updated <b id="today"></b></span><span>⚡ Built to share</span></div></div><div class="glass orbit"><h3>Orbit map</h3><small class="muted">Where the ecosystem is moving</small><div class="core">OS<br>ORBIT</div><div class="node n1">CLOUD</div><div class="node n2">AI</div><div class="node n3">DATA</div><div class="node n4">DEV</div></div></section>
-<div class="ticker"><span>THIS WEEK'S SIGNAL</span><b>+ Cloud-native momentum</b><span>•</span><b>+ Open observability</b><span>•</span><b>+ Real-time data</b><span>•</span><b>+ AI tooling</b></div>
-<section class="reveal"><div class="stats"><div class="stat"><strong>10</strong><span>featured projects</span></div><div class="stat"><strong>4</strong><span>radar stages</span></div><div class="stat"><strong>7</strong><span>events to watch</span></div><div class="stat"><strong>∞</strong><span>ideas to explore</span></div></div></section>
-<section id="projects" class="reveal"><div class="head"><h2>Discover the signal</h2><p>Projects earning attention, with a clear reason to care.</p></div><div class="toolbar"><input id="search" aria-label="Search projects" placeholder="Search projects, tags, or use cases…"><select id="area" aria-label="Filter by area"><option value="all">All areas</option><option>Cloud Native</option><option>Data</option><option>DevTools</option><option>Observability</option></select></div><div id="projectsGrid" class="grid"></div></section>
-<section class="reveal"><div class="head"><h2>Momentum, at a glance</h2><p>Editorial signals for this weekly edition. Verify before making decisions.</p></div><div class="charts"><div class="card"><h3>Project momentum</h3><div class="barline"><span>Kubernetes</span><div class="bar"><i style="width:92%"></i></div><b>92</b></div><div class="barline"><span>Cilium</span><div class="bar"><i style="width:78%"></i></div><b>78</b></div><div class="barline"><span>Argo CD</span><div class="bar"><i style="width:71%"></i></div><b>71</b></div><div class="barline"><span>Flink</span><div class="bar"><i style="width:63%"></i></div><b>63</b></div></div><div class="card"><h3>Attention by area</h3><div class="barline"><span>Cloud Native</span><div class="bar"><i style="width:88%"></i></div><b>28%</b></div><div class="barline"><span>AI / ML</span><div class="bar"><i style="width:68%"></i></div><b>20%</b></div><div class="barline"><span>Data</span><div class="bar"><i style="width:61%"></i></div><b>18%</b></div><div class="barline"><span>DevTools</span><div class="bar"><i style="width:48%"></i></div><b>14%</b></div></div></div></section>
-<section id="radar" class="reveal"><div class="head"><h2>Technology radar</h2><p>Make a faster decision: adopt, trial, assess, or hold.</p></div><div class="radar"><div class="card ring adopt"><h3>◉ Adopt</h3><ul><li>Kubernetes</li><li>PostgreSQL</li><li>Docker</li><li>Prometheus</li></ul></div><div class="card ring trial"><h3>◌ Trial</h3><ul><li>Cilium</li><li>Argo CD</li><li>OpenTelemetry</li><li>Apache Flink</li></ul></div><div class="card ring assess"><h3>◍ Assess</h3><ul><li>WebAssembly</li><li>Apache Pulsar</li><li>Temporal</li><li>Ollama</li></ul></div><div class="card ring hold"><h3>⊘ Hold</h3><ul><li>Unmaintained forks</li><li>Manual deployments</li><li>Opaque dependencies</li></ul></div></div></section>
-<section id="events" class="reveal"><div class="head"><h2>Events orbit</h2><p>Put useful hackathons and conferences on your radar.</p></div><div class="events"><article class="card"><span class="date">HACKATHONS · DIRECTORY</span><h3>Build with the community</h3><p class="muted">Find current online and local events, then verify details with organizers.</p><a class="links" href="https://mlh.io/seasons/2026/events" target="_blank" rel="noopener noreferrer">Browse MLH events ↗</a></article><article class="card"><span class="date">CLOUD NATIVE</span><h3>KubeCon + CloudNativeCon</h3><p class="muted">Kubernetes, platform engineering, security, and observability.</p><a class="links" href="https://events.linuxfoundation.org/kubecon-cloudnativecon-north-america/" target="_blank" rel="noopener noreferrer">Official event site ↗</a></article><article class="card"><span class="date">APACHE COMMUNITY</span><h3>ApacheCon</h3><p class="muted">Open-source data, streaming, distributed systems, and community.</p><a class="links" href="https://www.apachecon.com/" target="_blank" rel="noopener noreferrer">Official ApacheCon ↗</a></article></div></section>
-<section id="community" class="reveal"><div class="head"><h2>Join the signal</h2><p>Leave a note for the next builder who visits.</p></div><div class="card"><button class="btn" id="like">♥ <span id="likes">0</span> likes</button><span class="muted"> Browser-local demo feedback.</span><div class="comment"><input id="commentInput" maxlength="180" placeholder="What should we explore next?"><button class="btn primary" id="post">Post</button></div><div id="comments" class="comments"></div></div></section>
-</main><footer class="footer"><div class="shell"><b>OpenSource(OS) Orbit</b><p>Your weekly view of the open-source universe.</p>Built for discovery · discussion · sharing</div></footer>
+  <section class="hero reveal">
+    <div class="hero-grid">
+      <div class="glass hero-copy">
+        <span class="eyebrow"><i></i> Weekly signal · 2026 / Week 38</span>
+        <h1>What’s rising in the <span class="shine">open-source</span> universe.</h1>
+        <p>Built with reference to the <a href="https://trendshift.io/weekly" target="_blank" rel="noreferrer" style="color:var(--cyan);font-weight:700">Trendshift Weekly Update</a> format: high-signal projects, the week’s momentum, and the tools worth watching before the next wave hits.</p>
+        <div class="hero-actions">
+          <a class="btn primary" href="https://trendshift.io/weekly" target="_blank" rel="noreferrer">View Trendshift Weekly</a>
+          <a class="btn" href="#projects">Browse the signal</a>
+        </div>
+      </div>
+      <div class="hero-panel">
+        <div class="panel-label">This week’s power list</div>
+        <div class="leader-list">
+          <div class="leader-row">
+            <div class="leader-rank">#1</div>
+            <div>
+              <div class="leader-name">Kubernetes</div>
+              <span class="leader-meta">Cloud native</span>
+            </div>
+            <div class="rank-up">+24%</div>
+          </div>
+          <div class="leader-row">
+            <div class="leader-rank">#2</div>
+            <div>
+              <div class="leader-name">OpenTelemetry</div>
+              <span class="leader-meta">Observability</span>
+            </div>
+            <div class="rank-up">+18%</div>
+          </div>
+          <div class="leader-row">
+            <div class="leader-rank">#3</div>
+            <div>
+              <div class="leader-name">n8n</div>
+              <span class="leader-meta">AI automation</span>
+            </div>
+            <div class="rank-up">+15%</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ticker">
+      <span>THIS WEEK’S SIGNAL</span>
+      <b>+ Cloud-native momentum</b>
+      <span>•</span>
+      <b>+ Open observability</b>
+      <span>•</span>
+      <b>+ AI tooling</b>
+      <span>•</span>
+      <b>+ Real-time data</b>
+    </div>
+
+    <div class="stats">
+      <div class="stat"><strong>10</strong><span>featured projects</span></div>
+      <div class="stat"><strong>4</strong><span>radar stages</span></div>
+      <div class="stat"><strong>3</strong><span>signal themes</span></div>
+      <div class="stat"><strong>1</strong><span>curated weekly lens</span></div>
+    </div>
+  </section>
+
+  <section id="projects" class="reveal">
+    <div class="head">
+      <h2>Trending projects</h2>
+      <p>Projects gathering serious attention this week, with a clear reason to care.</p>
+    </div>
+    <div class="toolbar">
+      <label class="search-wrap" aria-label="Filter projects">
+        <span>🔎</span>
+        <input id="search" type="text" placeholder="Search projects or tags..." autocomplete="off">
+      </label>
+      <div class="legend">Scored on relevance, momentum, and developer pull</div>
+    </div>
+    <div id="projectGrid" class="project-grid"></div>
+  </section>
+
+  <section class="reveal">
+    <div class="head">
+      <h2>Momentum, at a glance</h2>
+      <p>Editorial signals for this edition. Verify before you bet on a trend.</p>
+    </div>
+    <div class="charts">
+      <div class="card chart-card">
+        <h3>Weekly momentum</h3>
+        <div class="bars">
+          <div class="bar-row"><span class="label">AI tooling</span><div class="bar-track"><span class="bar-fill" style="width:92%"></span></div><span>92</span></div>
+          <div class="bar-row"><span class="label">Platform</span><div class="bar-track"><span class="bar-fill" style="width:84%"></span></div><span>84</span></div>
+          <div class="bar-row"><span class="label">Observability</span><div class="bar-track"><span class="bar-fill" style="width:79%"></span></div><span>79</span></div>
+          <div class="bar-row"><span class="label">Data infra</span><div class="bar-track"><span class="bar-fill" style="width:70%"></span></div><span>70</span></div>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Why this week matters</h3>
+        <ul class="list">
+          <li><strong>Developer workflow:</strong> AI-native tooling is moving from experimentation into real day-to-day trust.</li>
+          <li><strong>Ops signal:</strong> platform teams are favoring more observable and self-service systems.</li>
+          <li><strong>Data focus:</strong> low-latency data stacks and streaming infra are regaining strategic attention.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="radar" class="reveal">
+    <div class="head">
+      <h2>Technology radar</h2>
+      <p>Make a faster decision: adopt, trial, assess, or hold.</p>
+    </div>
+    <div class="radar">
+      <div class="card ring adopt">
+        <h3>◉ Adopt</h3>
+        <p>Kubernetes, GitHub Actions, Postgres, and static site tooling remain the default platform layer.</p>
+      </div>
+      <div class="card ring trial">
+        <h3>◉ Trial</h3>
+        <p>OpenTelemetry, n8n, and event-driven workflows are seeing broad usability and experimentation.</p>
+      </div>
+      <div class="card ring assess">
+        <h3>◉ Assess</h3>
+        <p>AI agent developer stacks, vector retrieval layers, and real-time analytics deserve close review.</p>
+      </div>
+      <div class="card ring hold">
+        <h3>◉ Hold</h3>
+        <p>Over-hyped “AI everything” tools still need proof points before widespread commitment.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="events" class="reveal">
+    <div class="head">
+      <h2>Events orbit</h2>
+      <p>Useful conferences, meetups, and hackathons worth putting on your radar.</p>
+    </div>
+    <div class="events">
+      <article class="card event-card">
+        <span class="date">Oct 18 — 20</span>
+        <h3>Open Source Summit Europe</h3>
+        <p>The developer ecosystem’s public signal on infrastructure, policy, and community momentum.</p>
+      </article>
+      <article class="card event-card">
+        <span class="date">Nov 05 — 07</span>
+        <h3>Platform Engineering Day</h3>
+        <p>Platform, developer experience, and cloud workflows converge around practical adoption patterns.</p>
+      </article>
+      <article class="card event-card">
+        <span class="date">Nov 12 — 14</span>
+        <h3>AI Tools Hack Night</h3>
+        <p>Real-world experiments in AI workflows, integrations, and internal automation for builders.</p>
+      </article>
+    </div>
+  </section>
+
+  <section id="community" class="community reveal">
+    <div class="head">
+      <h2>Join the signal</h2>
+      <p>Leave a note for the next builder who visits.</p>
+    </div>
+    <div class="card">
+      <div class="community-grid">
+        <div class="community-copy">
+          <p>Open-source momentum is strongest when it is shared, debated, and verified. Add your pick for the next product or tool that deserves attention, and then compare it against the broader trendline.</p>
+        </div>
+        <div class="like-box">
+          <button class="btn primary" id="like">♥ <span id="likeCount">12</span> likes</button>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="shell">
+    <div>
+      <b>OpenSource(OS) Orbit</b>
+      <p>Your weekly view of the open-source universe.</p>
+    </div>
+    <p>Built for discovery · discussion · sharing</p>
+  </div>
+</footer>
+
 <script>
-const projects=[{name:'Kubernetes',area:'Cloud Native',tags:['Containers','Platform Engineering'],score:92,desc:'Production orchestration for deploying, scaling, and managing containerized applications.',use:'Run resilient microservices across cloud, hybrid, and edge environments.',git:'https://github.com/kubernetes/kubernetes',docs:'https://kubernetes.io/docs/'},{name:'Cilium',area:'Cloud Native',tags:['Networking','Security','eBPF'],score:78,desc:'eBPF-powered networking, observability, and security for modern clusters.',use:'Build identity-aware network policy and zero-trust service communication.',git:'https://github.com/cilium/cilium',docs:'https://docs.cilium.io/'},{name:'OpenTelemetry',area:'Observability',tags:['Tracing','Metrics','Logs'],score:75,desc:'Vendor-neutral framework for collecting telemetry from distributed software.',use:'Understand latency and failures across services without vendor lock-in.',git:'https://github.com/open-telemetry/opentelemetry-collector',docs:'https://opentelemetry.io/docs/'},{name:'Apache Flink',area:'Data',tags:['Streaming','Analytics'],score:63,desc:'Stateful processing engine for bounded and unbounded data streams.',use:'Power fraud detection, real-time analytics, and event-driven decisions.',git:'https://github.com/apache/flink',docs:'https://flink.apache.org/'},{name:'Argo CD',area:'DevTools',tags:['GitOps','Kubernetes'],score:71,desc:'Declarative, GitOps continuous delivery for Kubernetes workloads.',use:'Keep clusters synchronized with version-controlled application intent.',git:'https://github.com/argoproj/argo-cd',docs:'https://argo-cd.readthedocs.io/'},{name:'PostgreSQL',area:'Data',tags:['SQL','Database'],score:69,desc:'Reliable, extensible relational database for transactional workloads.',use:'Power application backends where correctness and rich querying matter.',git:'https://github.com/postgres/postgres',docs:'https://www.postgresql.org/docs/'}];
-const $=id=>document.getElementById(id),esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));function render(){const q=$('search').value.toLowerCase(),a=$('area').value,rows=projects.filter(p=>(a==='all'||p.area===a)&&[p.name,p.area,p.desc,p.use,...p.tags].join(' ').toLowerCase().includes(q));$('projectsGrid').innerHTML=rows.length?rows.map((p,i)=>`<article class="card"><div class="card-top"><span class="rank">${String(i+1).padStart(2,'0')}</span><span class="tag">${p.area}</span></div><h3>${p.name}</h3><p class="muted">${p.desc}</p><div class="tags">${p.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div><div class="use"><b>Use case:</b> ${p.use}</div><div class="links"><a href="${p.git}" target="_blank" rel="noopener noreferrer">GitHub ↗</a><a href="${p.docs}" target="_blank" rel="noopener noreferrer">Docs ↗</a><span class="muted">Momentum ${p.score}</span></div></article>`).join(''):'<div class="empty">No projects match that signal. Try another search.</div>'}async function share(){try{if(navigator.share)await navigator.share({title:'OpenSource(OS) Orbit',text:'Explore this week\'s open-source universe.',url:location.href});else{await navigator.clipboard.writeText(location.href);alert('Orbit link copied to clipboard.')}}catch(e){}}function load(){ $('likes').textContent=localStorage.orbitLikes||0;const c=JSON.parse(localStorage.orbitComments||'[]');$('comments').innerHTML=c.length?c.map(x=>`<div class="comment-item">💬 ${esc(x)}</div>`).join(''):'<span>No comments yet — be the first signal.</span>'}function like(){let n=Number(localStorage.orbitLikes||0);if(localStorage.orbitLiked){n--;localStorage.removeItem('orbitLiked')}else{n++;localStorage.orbitLiked='1'}localStorage.orbitLikes=n;load()}function post(){const i=$('commentInput');if(!i.value.trim())return;const c=JSON.parse(localStorage.orbitComments||'[]');c.unshift(i.value.trim());localStorage.orbitComments=JSON.stringify(c.slice(0,20));i.value='';load()}$('today').textContent=new Date().toLocaleDateString(undefined,{month:'short',day:'numeric',year:'numeric'});$('search').addEventListener('input',render);$('area').addEventListener('change',render);$('share').addEventListener('click',share);$('like').addEventListener('click',like);$('post').addEventListener('click',post);$('commentInput').addEventListener('keydown',e=>{if(e.key==='Enter')post()});render();load();const observer=new IntersectionObserver(entries=>entries.forEach(e=>e.isIntersecting&&e.target.classList.add('visible')),{threshold:.12});document.querySelectorAll('.reveal').forEach(e=>observer.observe(e));document.addEventListener('pointermove',e=>{document.documentElement.style.setProperty('--mx',e.clientX+'px');document.documentElement.style.setProperty('--my',e.clientY+'px')});
-</script></body></html>
+const projects = [
+ {name:'Kubernetes', area:'Cloud Native', tags:['Containers','Platform Engineering','Ops'], score:92, desc:'Production-grade orchestration for deploying and scaling containerized workloads worldwide.', reason:'Core platform layer'},
+ {name:'OpenTelemetry', area:'Observability', tags:['Telemetry','Monitoring','DevEx'], score:90, desc:'The open standard for collecting traces, metrics, and logs across distributed systems.', reason:'Standards adoption'},
+ {name:'n8n', area:'AI Automation', tags:['Workflow','AI','Integrations'], score:88, desc:'A flexible automation stack for connecting tools, APIs, and AI-driven workflows.', reason:'No-code + code fit'},
+ {name:'Postgres', area:'Data', tags:['Database','Analytics','Reliability'], score:86, desc:'The durable relational foundation for apps that need trust, scale, and operational maturity.', reason:'Backbone data layer'},
+ {name:'Vector Search', area:'AI Infra', tags:['Retrieval','RAG','Search'], score:82, desc:'High-value retrieval moves are making semantic search a practical default for intelligent products.', reason:'AI product pattern'},
+ {name:'Apache Kafka', area:'Streaming', tags:['Events','Data','Realtime'], score:80, desc:'Still the default pattern for resilient event pipelines and real-time data movement.', reason:'Data flow backbone'},
+ {name:'GitHub Actions', area:'Developer Experience', tags:['CI/CD','Automation','DevOps'], score:78, desc:'A strong platform for shipping fast with code automation, tests, and release pipelines.', reason:'Workflow standard'},
+ {name:'Ray', area:'AI Compute', tags:['ML','Distributed','GPU'], score:76, desc:'An increasingly relevant way to scale AI and distributed compute tasks efficiently.', reason:'ML runtime growth'},
+ {name:'Sentry', area:'Reliability', tags:['Monitoring','Alerts','Debugging'], score:74, desc:'Critical tooling for tracing production issues and protecting developer velocity.', reason:'Production focus'},
+ {name:'Django', area:'Web Frameworks', tags:['Python','Backend','Productivity'], score:72, desc:'Mature, practical, and still efficient for shipping well-structured web products quickly.', reason:'Stable build choice'}
+];
+
+const $ = id => document.getElementById(id);
+const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','\'':'&#39;'}[c]));
+
+function renderProjects() {
+  const q = $('search').value.trim().toLowerCase();
+  const visible = q ? projects.filter(project => {
+    const haystack = [project.name, project.area, project.tags.join(' '), project.desc, project.reason].join(' ').toLowerCase();
+    return haystack.includes(q);
+  }) : projects;
+
+  $('projectGrid').innerHTML = visible.map(project => `
+    <article class="card project-card">
+      <div class="project-top">
+        <div>
+          <div class="project-name">${esc(project.name)}</div>
+          <div class="project-area">${esc(project.area)}</div>
+        </div>
+        <div class="score-badge">${project.score}</div>
+      </div>
+      <div class="project-tags">
+        ${project.tags.map(tag => `<span class="tag">${esc(tag)}</span>`).join('')}
+      </div>
+      <p>${esc(project.desc)}</p>
+      <div class="project-meta">
+        <span class="reason">${esc(project.reason)}</span>
+        <span class="tag">Signal</span>
+      </div>
+    </article>
+  `).join('');
+}
+
+$('search').addEventListener('input', renderProjects);
+
+let likeCount = 12;
+$('like').addEventListener('click', () => {
+  likeCount += 1;
+  $('likeCount').textContent = likeCount;
+  $('like').classList.add('pulse');
+  setTimeout(() => $('like').classList.remove('pulse'), 220);
+});
+
+renderProjects();
+</script>
+</body>
+</html>
