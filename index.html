@@ -185,6 +185,16 @@ section{padding:22px 0}
 .list li{padding:14px 0;border-bottom:1px solid rgba(255,255,255,.06);color:var(--muted);line-height:1.7}
 .list li:last-child{border-bottom:none}
 .list strong{color:var(--ink)}
+.mini-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.mini-card{padding:18px;border-radius:20px;background:rgba(255,255,255,.02);border:1px solid var(--line)}
+.signal-pill{display:inline-block;padding:6px 10px;border-radius:999px;background:rgba(115,231,255,.08);border:1px solid rgba(115,231,255,.25);color:var(--cyan);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase}
+.mini-card h3{margin:12px 0 10px;font-size:1.3rem;letter-spacing:-.04em}
+.mini-card p{margin:0;color:var(--muted);line-height:1.7}
+.reads-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.read-card{padding:18px;border-radius:20px;background:rgba(255,255,255,.02);border:1px solid var(--line)}
+.read-card .meta{display:flex;justify-content:space-between;gap:10px;align-items:center;color:var(--muted);font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;margin-bottom:12px}
+.read-card h3{margin:0 0 10px;font-size:1.18rem;letter-spacing:-.03em}
+.read-card p{margin:0;color:var(--muted);line-height:1.7}
 .radar{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
 .ring{min-height:180px}
 .ring h3{margin:0 0 12px;font-size:1.3rem;letter-spacing:-.04em}
@@ -211,7 +221,7 @@ section{padding:22px 0}
 .footer p{margin:8px 0 0;color:var(--muted)}
 .reveal{opacity:1;transform:none}
 @media (max-width:900px){
-  .hero-grid,.charts,.community-grid,.events,.radar{grid-template-columns:1fr}
+  .hero-grid,.charts,.community-grid,.events,.radar,.mini-grid,.reads-grid{grid-template-columns:1fr}
   .stats{grid-template-columns:repeat(2,minmax(0,1fr))}
   .head{display:block}
   .head p{margin-top:8px}
@@ -235,6 +245,7 @@ section{padding:22px 0}
     <div class="navlinks">
       <a href="#projects">Discover</a>
       <a href="#radar">Radar</a>
+      <a href="#signals">Signals</a>
       <a href="#events">Events</a>
       <a href="https://trendshift.io/weekly" target="_blank" rel="noreferrer">Trendshift Weekly</a>
     </div>
@@ -343,6 +354,54 @@ section{padding:22px 0}
     </div>
   </section>
 
+  <section id="signals" class="reveal">
+    <div class="head">
+      <h2>Signal map</h2>
+      <p>This week’s themes are broad, but the practical pattern is clear: platform maturity, AI workflow adoption, and observability are converging.</p>
+    </div>
+    <div class="mini-grid">
+      <div class="mini-card">
+        <span class="signal-pill">Build</span>
+        <h3>AI-native workflows</h3>
+        <p>Teams are retooling DevEx around agentic coding, orchestration, and task automation that feels lighter than old pipeline-heavy stacks.</p>
+      </div>
+      <div class="mini-card">
+        <span class="signal-pill">Run</span>
+        <h3>Operational clarity</h3>
+        <p>Observability tooling is becoming the default trust layer between engineering velocity and production reliability.</p>
+      </div>
+      <div class="mini-card">
+        <span class="signal-pill">Scale</span>
+        <h3>Data + control planes</h3>
+        <p>More teams are leaning into real-time and event-driven architecture to keep product systems responsive and composable.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="reveal">
+    <div class="head">
+      <h2>Top movers this week</h2>
+      <p>The projects with the sharpest lift in attention and practical relevance.</p>
+    </div>
+    <div class="reads-grid">
+      <article class="read-card">
+        <div class="meta"><span>+24%</span><span>Cloud</span></div>
+        <h3>Kubernetes</h3>
+        <p>Still the control plane for modern infrastructure; adoption remains strongest among teams designing for scale and consistency.</p>
+      </article>
+      <article class="read-card">
+        <div class="meta"><span>+18%</span><span>Observability</span></div>
+        <h3>OpenTelemetry</h3>
+        <p>Cross-vendor instrumentation is becoming the standard for teams that want portable telemetry and cleaner production debugging.</p>
+      </article>
+      <article class="read-card">
+        <div class="meta"><span>+15%</span><span>AI</span></div>
+        <h3>n8n</h3>
+        <p>Workflow automation continues to gain traction because it reduces the gap between AI experimentation and real operational use.</p>
+      </article>
+    </div>
+  </section>
+
   <section id="radar" class="reveal">
     <div class="head">
       <h2>Technology radar</h2>
@@ -365,6 +424,30 @@ section{padding:22px 0}
         <h3>◉ Hold</h3>
         <p>Over-hyped “AI everything” tools still need proof points before widespread commitment.</p>
       </div>
+    </div>
+  </section>
+
+  <section class="reveal">
+    <div class="head">
+      <h2>What to read next</h2>
+      <p>High-signal reads for teams deciding where to invest attention or tooling next.</p>
+    </div>
+    <div class="reads-grid">
+      <article class="read-card">
+        <div class="meta"><span>Guide</span><span>10 min</span></div>
+        <h3>Choosing your observability baseline</h3>
+        <p>For teams moving beyond ad hoc logging, this is the clearest path to structured monitoring and better signal quality.</p>
+      </article>
+      <article class="read-card">
+        <div class="meta"><span>Report</span><span>12 min</span></div>
+        <h3>What is actually sticking in AI tooling?</h3>
+        <p>Not every AI feature is creating real workflow value; this is the shortlist of tools gaining durable usage.</p>
+      </article>
+      <article class="read-card">
+        <div class="meta"><span>Checklist</span><span>8 min</span></div>
+        <h3>Platform engineering essentials for 2026</h3>
+        <p>Simple patterns keep emerging: standard interfaces, self-service, and better visibility across the stack.</p>
+      </article>
     </div>
   </section>
 
