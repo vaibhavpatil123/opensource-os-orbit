@@ -38,6 +38,7 @@ body{
   color:var(--ink);
   min-height:100vh;
   perspective:1000px;
+  overflow-x:hidden
 }
 a{color:inherit;text-decoration:none}
 img{max-width:100%;display:block}
@@ -55,7 +56,7 @@ button,input{font:inherit}
 }
 .brand{
   display:inline-flex;align-items:center;gap:12px;
-  font-weight:800;letter-spacing:-.04em;color:var(--ink)
+  font-weight:800;letter-spacing:-.04em;color:var(--ink);cursor:pointer
 }
 .logo{
   width:12px;height:12px;border-radius:50%;
@@ -68,7 +69,7 @@ button,input{font:inherit}
   50%{box-shadow:0 0 44px rgba(115,231,255,1.2)}
 }
 .navlinks{display:flex;align-items:center;gap:18px;color:var(--muted);font-size:.95rem}
-.navlinks a{transition:color .2s ease}
+.navlinks a{transition:color .2s ease;cursor:pointer}
 .navlinks a:hover{color:var(--ink)}
 .btn{
   display:inline-flex;align-items:center;justify-content:center;
@@ -120,7 +121,6 @@ main{padding-bottom:64px}
   display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;
   padding:12px 12px;border-radius:16px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);
   transition:all .3s cubic-bezier(.34,.1,.68,.55);
-  transform-origin:center;
 }
 .leader-row:hover{
   background:rgba(255,255,255,.08);
@@ -138,12 +138,7 @@ main{padding-bottom:64px}
 .ticker{
   display:flex;flex-wrap:wrap;align-items:center;gap:10px;justify-content:center;
   margin:18px 0 28px;padding:12px 16px;border:1px solid var(--line);border-radius:999px;
-  background:rgba(255,255,255,.02);color:var(--muted);font-size:.82rem;letter-spacing:.14em;text-transform:uppercase;
-  animation:slide-in .8s ease-out
-}
-@keyframes slide-in{
-  from{opacity:0;transform:translateY(-10px)}
-  to{opacity:1;transform:translateY(0)}
+  background:rgba(255,255,255,.02);color:var(--muted);font-size:.82rem;letter-spacing:.14em;text-transform:uppercase
 }
 .ticker b{color:var(--ink);letter-spacing:.06em}
 .stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px;margin-top:8px}
@@ -160,8 +155,8 @@ main{padding-bottom:64px}
   box-shadow:0 12px 28px rgba(115,231,255,.15)
 }
 .stat:hover::before{opacity:1}
-.stat strong{display:block;font-size:clamp(1.6rem,3vw,2.4rem);letter-spacing:-.06em;font-weight:900;position:relative;z-index:1}
-.stat span{color:var(--muted);font-size:.9rem;position:relative;z-index:1}
+.stat strong{display:block;font-size:clamp(1.6rem,3vw,2.4rem);letter-spacing:-.06em;font-weight:900}
+.stat span{color:var(--muted);font-size:.9rem}
 section{padding:22px 0}
 .head{
   display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:18px
@@ -178,7 +173,7 @@ section{padding:22px 0}
 }
 .search-wrap span{color:var(--muted)}
 .search-wrap input{
-  width:100%;border:none;outline:none;background:transparent;color:var(--ink)
+  width:100%;border:none;outline:none;background:transparent;color:var(--ink);font-size:inherit
 }
 .search-wrap input::placeholder{color:var(--muted)}
 .legend{color:var(--muted);font-size:.82rem}
@@ -234,92 +229,31 @@ section{padding:22px 0}
 .chart-card .bars{display:grid;gap:14px;margin-top:18px}
 .bar-row{display:grid;grid-template-columns:120px 1fr 38px;gap:10px;align-items:center;font-size:.9rem}
 .bar-row .label{color:var(--muted)}
-.bar-track{
-  height:10px;border-radius:999px;background:rgba(255,255,255,.04);overflow:hidden;border:1px solid rgba(255,255,255,.06);
-  position:relative
-}
-.bar-fill{
-  display:block;height:100%;border-radius:inherit;background:linear-gradient(90deg,var(--cyan),var(--purple),var(--pink));
-  animation:fill-width 1.2s cubic-bezier(.34,.1,.68,.55) forwards;transform-origin:left
-}
-@keyframes fill-width{
-  from{width:0!important}
-  to{width:inherit}
-}
+.bar-track{height:10px;border-radius:999px;background:rgba(255,255,255,.04);overflow:hidden;border:1px solid rgba(255,255,255,.06)}
+.bar-fill{display:block;height:100%;border-radius:inherit;background:linear-gradient(90deg,var(--cyan),var(--purple),var(--pink))}
 .list{list-style:none;padding:0;margin:18px 0 0;display:grid;gap:14px}
-.list li{padding:14px 0;border-bottom:1px solid rgba(255,255,255,.06);color:var(--muted);line-height:1.7;transition:all .2s ease}
-.list li:hover{color:var(--ink);padding-left:8px}
+.list li{padding:14px 0;border-bottom:1px solid rgba(255,255,255,.06);color:var(--muted);line-height:1.7}
 .list li:last-child{border-bottom:none}
 .list strong{color:var(--ink)}
 .mini-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
-.mini-card{
-  padding:18px;border-radius:20px;background:rgba(255,255,255,.02);border:1px solid var(--line);
-  transition:all .3s ease;position:relative;overflow:hidden
-}
-.mini-card::before{
-  content:"";position:absolute;inset:0;background:linear-gradient(135deg,rgba(115,231,255,.08),rgba(169,140,255,.08));
-  opacity:0;transition:opacity .3s ease;z-index:0
-}
-.mini-card:hover{
-  transform:translateY(-6px);border-color:rgba(115,231,255,.3);
-  box-shadow:0 16px 32px rgba(115,231,255,.2)
-}
-.mini-card:hover::before{opacity:1}
-.mini-card > *{position:relative;z-index:1}
+.mini-card{padding:18px;border-radius:20px;background:rgba(255,255,255,.02);border:1px solid var(--line)}
 .signal-pill{display:inline-block;padding:6px 10px;border-radius:999px;background:rgba(115,231,255,.08);border:1px solid rgba(115,231,255,.25);color:var(--cyan);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase}
 .mini-card h3{margin:12px 0 10px;font-size:1.3rem;letter-spacing:-.04em}
 .mini-card p{margin:0;color:var(--muted);line-height:1.7}
 .reads-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
-.read-card{
-  padding:18px;border-radius:20px;background:rgba(255,255,255,.02);border:1px solid var(--line);
-  transition:all .3s cubic-bezier(.34,.1,.68,.55);
-  position:relative;overflow:hidden
-}
-.read-card::before{
-  content:"";position:absolute;top:0;left:0;width:100%;height:1px;
-  background:linear-gradient(90deg,transparent,rgba(115,231,255,.5),transparent);
-  opacity:0;transition:opacity .3s ease
-}
-.read-card:hover{
-  transform:translateY(-6px);border-color:rgba(115,231,255,.3);
-  box-shadow:0 16px 32px rgba(115,231,255,.2)
-}
-.read-card:hover::before{opacity:1}
+.read-card{padding:18px;border-radius:20px;background:rgba(255,255,255,.02);border:1px solid var(--line)}
 .read-card .meta{display:flex;justify-content:space-between;gap:10px;align-items:center;color:var(--muted);font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;margin-bottom:12px}
 .read-card h3{margin:0 0 10px;font-size:1.18rem;letter-spacing:-.03em}
 .read-card p{margin:0;color:var(--muted);line-height:1.7}
 .radar{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
-.ring{min-height:200px;border-radius:20px;padding:18px;transition:all .3s ease;border:1px solid;position:relative;overflow:hidden}
-.ring::before{
-  content:"";position:absolute;inset:0;opacity:0;transition:opacity .3s ease;z-index:0
-}
-.ring > *{position:relative;z-index:1}
-.ring:hover{transform:translateY(-4px);box-shadow:0 20px 40px rgba(0,0,0,.4)}
+.ring{min-height:180px}
 .ring h3{margin:0 0 12px;font-size:1.3rem;letter-spacing:-.04em}
 .ring p{margin:0;color:var(--muted);line-height:1.7}
 .ring.adopt{border-color:rgba(96,241,174,.32);background:linear-gradient(180deg,rgba(96,241,174,.07),rgba(255,255,255,.02))}
-.ring.adopt::before{background:radial-gradient(circle at top right,rgba(96,241,174,.15),transparent 70%)}
 .ring.trial{border-color:rgba(115,231,255,.3);background:linear-gradient(180deg,rgba(115,231,255,.07),rgba(255,255,255,.02))}
-.ring.trial::before{background:radial-gradient(circle at top right,rgba(115,231,255,.15),transparent 70%)}
 .ring.assess{border-color:rgba(169,140,255,.3);background:linear-gradient(180deg,rgba(169,140,255,.07),rgba(255,255,255,.02))}
-.ring.assess::before{background:radial-gradient(circle at top right,rgba(169,140,255,.15),transparent 70%)}
 .ring.hold{border-color:rgba(255,118,189,.28);background:linear-gradient(180deg,rgba(255,118,189,.07),rgba(255,255,255,.02))}
-.ring.hold::before{background:radial-gradient(circle at top right,rgba(255,118,189,.15),transparent 70%)}
-.ring:hover::before{opacity:1}
 .events{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
-.event-card{
-  padding:18px;border-radius:20px;background:rgba(255,255,255,.02);border:1px solid var(--line);
-  transition:all .3s ease;position:relative;overflow:hidden
-}
-.event-card::before{
-  content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(115,231,255,.1),transparent);
-  opacity:0;transition:opacity .3s ease
-}
-.event-card:hover{
-  transform:translateY(-6px);border-color:rgba(115,231,255,.3);
-  box-shadow:0 16px 32px rgba(115,231,255,.2)
-}
-.event-card:hover::before{opacity:1}
 .event-card .date{display:inline-block;padding:8px 10px;border-radius:10px;background:rgba(255,255,255,.03);border:1px solid var(--line);font-size:.8rem;color:var(--muted);margin-bottom:12px}
 .event-card h3{margin:0 0 10px;font-size:1.2rem;letter-spacing:-.03em}
 .event-card p{margin:0;color:var(--muted);line-height:1.7}
@@ -336,14 +270,73 @@ section{padding:22px 0}
 .footer b{font-size:1.1rem}
 .footer p{margin:8px 0 0;color:var(--muted)}
 .reveal{opacity:1;transform:none}
-.scroll-reveal{
-  opacity:0;transform:translateY(20px);
-  animation:reveal-up .8s ease-out forwards
+
+/* Flying Icons Styles */
+.flying-element{
+  position:fixed;
+  pointer-events:none;
+  font-size:28px;
+  z-index:9999;
+  filter:drop-shadow(0 0 8px rgba(115,231,255,.8));
+  will-change:transform;
 }
-@keyframes reveal-up{
-  from{opacity:0;transform:translateY(20px)}
-  to{opacity:1;transform:translateY(0)}
+
+.bird-element{
+  animation:fly-up 3.5s cubic-bezier(.25,.46,.45,.94) forwards;
 }
+
+.star-element{
+  animation:star-fly 3.5s cubic-bezier(.25,.46,.45,.94) forwards,twinkle 0.6s ease-in-out infinite;
+}
+
+.particle-element{
+  animation:particle-burst 2.5s ease-out forwards;
+}
+
+@keyframes fly-up{
+  0%{
+    opacity:1;
+    transform:translate(0,0) scale(1) rotate(0deg);
+  }
+  50%{
+    transform:translate(var(--tx),var(--ty)*0.5) scale(1.1) rotate(20deg);
+  }
+  100%{
+    opacity:0;
+    transform:translate(var(--tx),var(--ty)) scale(0.3) rotate(45deg);
+  }
+}
+
+@keyframes star-fly{
+  0%{
+    opacity:1;
+    transform:translate(0,0) scale(1);
+  }
+  50%{
+    transform:translate(var(--tx),var(--ty)*0.5) scale(1.2);
+  }
+  100%{
+    opacity:0;
+    transform:translate(var(--tx),var(--ty)) scale(0.1);
+  }
+}
+
+@keyframes twinkle{
+  0%,100%{opacity:1;filter:drop-shadow(0 0 8px rgba(115,231,255,.8))}
+  50%{opacity:0.5;filter:drop-shadow(0 0 16px rgba(115,231,255,1.2))}
+}
+
+@keyframes particle-burst{
+  0%{
+    opacity:1;
+    transform:translate(0,0) scale(1);
+  }
+  100%{
+    opacity:0;
+    transform:translate(var(--tx),var(--ty)) scale(0);
+  }
+}
+
 @media (max-width:900px){
   .hero-grid,.charts,.community-grid,.events,.radar,.mini-grid,.reads-grid{grid-template-columns:1fr}
   .stats{grid-template-columns:repeat(2,minmax(0,1fr))}
@@ -359,7 +352,6 @@ section{padding:22px 0}
   .stats{grid-template-columns:1fr}
   .toolbar{padding:10px 12px}
   .search-wrap{max-width:none}
-  .project-grid{grid-template-columns:1fr}
 }
 </style>
 </head>
@@ -629,12 +621,12 @@ section{padding:22px 0}
 </footer>
 
 <script>
-// Web Audio API - Create beautiful synth sounds
+// Web Audio API - Create immersive synth sounds
 class AudioSynth {
   constructor() {
     this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
     this.master = this.audioContext.createGain();
-    this.master.gain.value = 0.1;
+    this.master.gain.value = 0.08;
     this.master.connect(this.audioContext.destination);
   }
 
@@ -657,42 +649,69 @@ class AudioSynth {
     });
   }
 
-  playHarmonicRise(startFreq, duration) {
+  playZoomSound() {
     const osc = this.audioContext.createOscillator();
     const gain = this.audioContext.createGain();
     osc.type = 'sine';
-    gain.gain.setValueAtTime(0.2, this.audioContext.currentTime);
-    gain.gain.exponentialRampToValueAtTime(0.01, this.audioContext.currentTime + duration);
-    osc.frequency.setValueAtTime(startFreq, this.audioContext.currentTime);
-    osc.frequency.exponentialRampToValueAtTime(startFreq * 2, this.audioContext.currentTime + duration);
+    gain.gain.setValueAtTime(0.15, this.audioContext.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.01, this.audioContext.currentTime + 0.3);
+    osc.frequency.setValueAtTime(300, this.audioContext.currentTime);
+    osc.frequency.exponentialRampToValueAtTime(800, this.audioContext.currentTime + 0.3);
     osc.connect(gain);
     gain.connect(this.master);
     osc.start(this.audioContext.currentTime);
-    osc.stop(this.audioContext.currentTime + duration);
+    osc.stop(this.audioContext.currentTime + 0.3);
   }
 }
 
 let synth;
+let lastZoom = 1;
+
 const projects = [
- {name:'LLaMA',category:'AI/ML',tags:['Models','NLP','Open-Source'],score:98,desc:'Meta\'s open-source large language model enabling fine-tuning and custom AI applications at scale.',reason:'LLM democratization'},
- {name:'Llama2',category:'AI/ML',tags:['Models','Production','Inference'],score:96,desc:'Production-grade LLM with improved safety, extended context, and commercial viability.',reason:'Enterprise AI'},
- {name:'Kubernetes',category:'Infrastructure',tags:['Containers','Orchestration','DevOps'],score:94,desc:'Industry standard for container orchestration, service deployment, and infrastructure automation.',reason:'Proven at scale'},
- {name:'OpenTelemetry',category:'Observability',tags:['Tracing','Metrics','Monitoring'],score:92,desc:'Unified instrumentation standard for collecting traces, metrics, and logs across systems.',reason:'Observability baseline'},
- {name:'Terraform',category:'Infrastructure',tags:['IaC','Cloud','Automation'],score:90,desc:'Infrastructure as Code framework for provisioning and managing cloud resources declaratively.',reason:'IaC standard'},
- {name:'PostgreSQL',category:'Data',tags:['Database','Analytics','Reliability'],score:88,desc:'Mature, open-source relational database with strong consistency, extensibility, and performance.',reason:'Data foundation'},
- {name:'Apache Spark',category:'Data',tags:['BigData','Analytics','Processing'],score:86,desc:'Distributed computing framework for large-scale data processing and real-time analytics.',reason:'Data scale'},
- {name:'Docker',category:'DevOps',tags:['Containers','Deployment','DevEx'],score:84,desc:'Containerization platform that remains foundational to modern development workflows.',reason:'Container standard'},
- {name:'GitHub Actions',category:'DevEx',tags:['CI/CD','Automation','DevOps'],score:82,desc:'Native GitHub workflow automation for testing, building, and deploying applications.',reason:'DevEx momentum'},
- {name:'FastAPI',category:'WebFramework',tags:['Python','Backend','Performance'],score:80,desc:'Modern, fast Python web framework for building APIs with automatic documentation and validation.',reason:'Framework innovation'},
- {name:'React',category:'Frontend',tags:['JavaScript','UI','Components'],score:78,desc:'Dominant JavaScript framework for building interactive user interfaces with component patterns.',reason:'Frontend standard'},
- {name:'Rust',category:'Systems',tags:['Performance','Safety','Concurrency'],score:76,desc:'Systems programming language gaining adoption for its safety guarantees and performance.',reason:'Language momentum'},
- {name:'Next.js',category:'Frontend',tags:['React','SSR','Fullstack'],score:74,desc:'React meta-framework for production applications with server-side rendering and static generation.',reason:'Framework evolution'},
- {name:'Prisma',category:'Data',tags:['ORM','TypeScript','Database'],score:72,desc:'Type-safe database client and migration tool for modern application development.',reason:'Developer experience'},
- {name:'Supabase',category:'Backend',tags:['Database','Auth','API'],score:70,desc:'Open-source Firebase alternative providing PostgreSQL, auth, and real-time capabilities.',reason:'Backend innovation'}
+  {name:'LLaMA',category:'AI/ML',tags:['Models','NLP','Open-Source'],score:98,desc:'Meta\'s open-source large language model enabling fine-tuning and custom AI applications at scale.',reason:'LLM democratization'},
+  {name:'Llama2',category:'AI/ML',tags:['Models','Production','Inference'],score:96,desc:'Production-grade LLM with improved safety, extended context, and commercial viability.',reason:'Enterprise AI'},
+  {name:'Kubernetes',category:'Infrastructure',tags:['Containers','Orchestration','DevOps'],score:94,desc:'Industry standard for container orchestration, service deployment, and infrastructure automation.',reason:'Proven at scale'},
+  {name:'OpenTelemetry',category:'Observability',tags:['Tracing','Metrics','Monitoring'],score:92,desc:'Unified instrumentation standard for collecting traces, metrics, and logs across systems.',reason:'Observability baseline'},
+  {name:'Terraform',category:'Infrastructure',tags:['IaC','Cloud','Automation'],score:90,desc:'Infrastructure as Code framework for provisioning and managing cloud resources declaratively.',reason:'IaC standard'},
+  {name:'PostgreSQL',category:'Data',tags:['Database','Analytics','Reliability'],score:88,desc:'Mature, open-source relational database with strong consistency, extensibility, and performance.',reason:'Data foundation'},
+  {name:'Apache Spark',category:'Data',tags:['BigData','Analytics','Processing'],score:86,desc:'Distributed computing framework for large-scale data processing and real-time analytics.',reason:'Data scale'},
+  {name:'Docker',category:'DevOps',tags:['Containers','Deployment','DevEx'],score:84,desc:'Containerization platform that remains foundational to modern development workflows.',reason:'Container standard'},
+  {name:'GitHub Actions',category:'DevEx',tags:['CI/CD','Automation','DevOps'],score:82,desc:'Native GitHub workflow automation for testing, building, and deploying applications.',reason:'DevEx momentum'},
+  {name:'FastAPI',category:'WebFramework',tags:['Python','Backend','Performance'],score:80,desc:'Modern, fast Python web framework for building APIs with automatic documentation and validation.',reason:'Framework innovation'},
+  {name:'React',category:'Frontend',tags:['JavaScript','UI','Components'],score:78,desc:'Dominant JavaScript framework for building interactive user interfaces with component patterns.',reason:'Frontend standard'},
+  {name:'Rust',category:'Systems',tags:['Performance','Safety','Concurrency'],score:76,desc:'Systems programming language gaining adoption for its safety guarantees and performance.',reason:'Language momentum'},
+  {name:'Next.js',category:'Frontend',tags:['React','SSR','Fullstack'],score:74,desc:'React meta-framework for production applications with server-side rendering and static generation.',reason:'Framework evolution'},
+  {name:'Prisma',category:'Data',tags:['ORM','TypeScript','Database'],score:72,desc:'Type-safe database client and migration tool for modern application development.',reason:'Developer experience'},
+  {name:'Supabase',category:'Backend',tags:['Database','Auth','API'],score:70,desc:'Open-source Firebase alternative providing PostgreSQL, auth, and real-time capabilities.',reason:'Backend innovation'}
 ];
 
 const $ = id => document.getElementById(id);
 const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','\'':'&#39;'}[c]));
+
+const birds = ['🐦', '🦅', '🕊️', '🦆', '🐤', '🦜', '🦢'];
+const stars = ['⭐', '✨', '🌟', '💫'];
+const particles = ['🌠', '✨', '🌟', '⚡', '💥'];
+
+function createFlyingElement(x, y, emoji, type = 'bird') {
+  const el = document.createElement('div');
+  el.className = `flying-element ${type}-element`;
+  el.textContent = emoji;
+  el.style.left = x + 'px';
+  el.style.top = y + 'px';
+  
+  const tx = (Math.random() - 0.5) * 300;
+  const ty = -250 - Math.random() * 150;
+  el.style.setProperty('--tx', tx + 'px');
+  el.style.setProperty('--ty', ty + 'px');
+  
+  document.body.appendChild(el);
+  setTimeout(() => el.remove(), 3500);
+  
+  if (synth && Math.random() > 0.6) {
+    const freq = 300 + Math.random() * 300;
+    synth.playTone(freq, 0.15);
+  }
+}
 
 function renderProjects() {
   const q = $('search').value.trim().toLowerCase();
@@ -702,7 +721,7 @@ function renderProjects() {
   }) : projects;
 
   $('projectGrid').innerHTML = visible.map((project, idx) => `
-    <article class="card project-card" style="animation-delay:${idx * 0.05}s" data-category="${project.category}">
+    <article class="card project-card">
       <div class="project-top">
         <div>
           <div class="project-name">${esc(project.name)}</div>
@@ -721,65 +740,62 @@ function renderProjects() {
     </article>
   `).join('');
 
-  setTimeout(() => {
-    document.querySelectorAll('.project-card').forEach((card, idx) => {
-      card.style.animationDelay = `${idx * 0.05}s`;
-      card.addEventListener('mouseenter', () => {
-        if (synth) synth.playTone(400 + idx * 30, 0.1);
-      });
+  document.querySelectorAll('.project-card').forEach((card, idx) => {
+    card.addEventListener('mouseenter', () => {
+      const birdEmoji = birds[Math.floor(Math.random() * birds.length)];
+      const rect = card.getBoundingClientRect();
+      createFlyingElement(rect.left + rect.width / 2, rect.top, birdEmoji, 'bird');
     });
-  }, 100);
-}
-
-function observeElements() {
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('scroll-reveal');
-      }
-    });
-  }, { threshold: 0.1 });
-
-  document.querySelectorAll('section').forEach(section => {
-    observer.observe(section);
   });
 }
 
-// Page Load Sounds
-function playPageLoadSequence() {
-  if (!synth) return;
-  // Intro: Ascending harmonic rise
-  synth.playHarmonicRise(220, 0.5);
-  setTimeout(() => {
-    synth.playTone(440, 0.15, 'sine');
-  }, 300);
-  setTimeout(() => {
-    synth.playTone(554.37, 0.15, 'sine');
-  }, 450);
-  setTimeout(() => {
-    synth.playChord([329.63, 493.88], 0.4, 'sine');
-  }, 600);
-}
-
-// Add mouse tracking for 3D effect
-document.addEventListener('mousemove', (e) => {
-  document.querySelectorAll('.project-card').forEach(card => {
-    const rect = card.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
+// Smooth scroll with flying stars
+let lastScrollTime = 0;
+window.addEventListener('scroll', () => {
+  const now = Date.now();
+  if (now - lastScrollTime > 200) {
+    lastScrollTime = now;
     
-    card.style.setProperty('--mouse-x', `${x}px`);
-    card.style.setProperty('--mouse-y', `${y}px`);
-    
-    const centerX = rect.width / 2;
-    const centerY = rect.height / 2;
-    const rotateX = (y - centerY) * 0.05;
-    const rotateY = (centerX - x) * 0.05;
-    
-    if (!card.matches(':hover')) {
-      card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+    if (Math.random() > 0.7) {
+      const x = Math.random() * window.innerWidth;
+      const y = window.scrollY + window.innerHeight / 3;
+      const starEmoji = stars[Math.floor(Math.random() * stars.length)];
+      createFlyingElement(x, y, starEmoji, 'star');
+      
+      if (synth) synth.playTone(600 + Math.random() * 200, 0.1);
     }
-  });
+    
+    if (Math.random() > 0.8) {
+      const x = Math.random() * window.innerWidth;
+      const y = window.scrollY + Math.random() * window.innerHeight;
+      const particle = particles[Math.floor(Math.random() * particles.length)];
+      createFlyingElement(x, y, particle, 'particle');
+    }
+  }
+});
+
+// Zoom detection with sound
+window.addEventListener('wheel', (e) => {
+  if (e.ctrlKey || e.metaKey) {
+    if (synth) synth.playZoomSound();
+    
+    const x = e.clientX;
+    const y = e.clientY;
+    for (let i = 0; i < 3; i++) {
+      setTimeout(() => {
+        const emoji = Math.random() > 0.5 ? birds[Math.floor(Math.random() * birds.length)] : stars[Math.floor(Math.random() * stars.length)];
+        createFlyingElement(x + (Math.random() - 0.5) * 100, y + (Math.random() - 0.5) * 100, emoji, Math.random() > 0.5 ? 'bird' : 'star');
+      }, i * 100);
+    }
+  }
+}, { passive: true });
+
+// Cursor tracking with occasional particles
+document.addEventListener('mousemove', (e) => {
+  if (Math.random() > 0.98) {
+    const emoji = Math.random() > 0.6 ? birds[Math.floor(Math.random() * birds.length)] : stars[Math.floor(Math.random() * stars.length)];
+    createFlyingElement(e.clientX, e.clientY, emoji, Math.random() > 0.5 ? 'bird' : 'star');
+  }
 });
 
 $('search').addEventListener('input', renderProjects);
@@ -789,18 +805,35 @@ $('like').addEventListener('click', () => {
   likeCount += 1;
   $('likeCount').textContent = likeCount;
   $('like').classList.add('pulse');
-  if (synth) {
-    synth.playChord([523.25, 659.25, 783.99], 0.3, 'sine');
+  
+  if (synth) synth.playChord([523.25, 659.25, 783.99], 0.4, 'sine');
+  
+  // Burst of flying elements on like
+  for (let i = 0; i < 8; i++) {
+    setTimeout(() => {
+      const emoji = Math.random() > 0.5 ? birds[Math.floor(Math.random() * birds.length)] : stars[Math.floor(Math.random() * stars.length)];
+      createFlyingElement(
+        window.innerWidth / 2 + (Math.random() - 0.5) * 200,
+        window.innerHeight / 2 + (Math.random() - 0.5) * 200,
+        emoji,
+        Math.random() > 0.5 ? 'bird' : 'star'
+      );
+    }, i * 80);
   }
+  
   setTimeout(() => $('like').classList.remove('pulse'), 220);
 });
 
-// Initialize
 window.addEventListener('load', () => {
   synth = new AudioSynth();
-  playPageLoadSequence();
   renderProjects();
-  observeElements();
+  
+  // Welcome sound on page load
+  setTimeout(() => {
+    synth.playTone(440, 0.2);
+    synth.playTone(550, 0.2);
+    synth.playTone(660, 0.3);
+  }, 300);
 });
 </script>
 </body>
