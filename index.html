@@ -38,7 +38,8 @@ body{
   color:var(--ink);
   min-height:100vh;
   perspective:1000px;
-  overflow-x:hidden
+  overflow-x:hidden;
+  cursor:none
 }
 a{color:inherit;text-decoration:none}
 img{max-width:100%;display:block}
@@ -334,6 +335,42 @@ section{padding:22px 0}
   100%{
     opacity:0;
     transform:translate(var(--tx),var(--ty)) scale(0);
+  }
+}
+
+/* Custom cursor trail */
+.cursor-bird{
+  position:fixed;
+  pointer-events:none;
+  font-size:24px;
+  z-index:10000;
+  filter:drop-shadow(0 0 4px rgba(115,231,255,.6));
+  will-change:transform;
+  font-weight:bold;
+  text-shadow:0 0 8px rgba(115,231,255,.8);
+}
+
+.cursor-trail{
+  position:fixed;
+  pointer-events:none;
+  width:2px;
+  height:2px;
+  border-radius:50%;
+  z-index:9998;
+  background:radial-gradient(circle, rgba(115,231,255,.8), rgba(169,140,255,.4));
+  box-shadow:0 0 6px rgba(115,231,255,.6);
+  will-change:transform;
+  animation:fade-trail 0.8s ease-out forwards;
+}
+
+@keyframes fade-trail{
+  from{
+    opacity:1;
+    transform:scale(1);
+  }
+  to{
+    opacity:0;
+    transform:scale(0.5);
   }
 }
 
@@ -667,30 +704,78 @@ class AudioSynth {
 let synth;
 let lastZoom = 1;
 
-const projects = [
-  {name:'LLaMA',category:'AI/ML',tags:['Models','NLP','Open-Source'],score:98,desc:'Meta\'s open-source large language model enabling fine-tuning and custom AI applications at scale.',reason:'LLM democratization'},
-  {name:'Llama2',category:'AI/ML',tags:['Models','Production','Inference'],score:96,desc:'Production-grade LLM with improved safety, extended context, and commercial viability.',reason:'Enterprise AI'},
-  {name:'Kubernetes',category:'Infrastructure',tags:['Containers','Orchestration','DevOps'],score:94,desc:'Industry standard for container orchestration, service deployment, and infrastructure automation.',reason:'Proven at scale'},
-  {name:'OpenTelemetry',category:'Observability',tags:['Tracing','Metrics','Monitoring'],score:92,desc:'Unified instrumentation standard for collecting traces, metrics, and logs across systems.',reason:'Observability baseline'},
-  {name:'Terraform',category:'Infrastructure',tags:['IaC','Cloud','Automation'],score:90,desc:'Infrastructure as Code framework for provisioning and managing cloud resources declaratively.',reason:'IaC standard'},
-  {name:'PostgreSQL',category:'Data',tags:['Database','Analytics','Reliability'],score:88,desc:'Mature, open-source relational database with strong consistency, extensibility, and performance.',reason:'Data foundation'},
-  {name:'Apache Spark',category:'Data',tags:['BigData','Analytics','Processing'],score:86,desc:'Distributed computing framework for large-scale data processing and real-time analytics.',reason:'Data scale'},
-  {name:'Docker',category:'DevOps',tags:['Containers','Deployment','DevEx'],score:84,desc:'Containerization platform that remains foundational to modern development workflows.',reason:'Container standard'},
-  {name:'GitHub Actions',category:'DevEx',tags:['CI/CD','Automation','DevOps'],score:82,desc:'Native GitHub workflow automation for testing, building, and deploying applications.',reason:'DevEx momentum'},
-  {name:'FastAPI',category:'WebFramework',tags:['Python','Backend','Performance'],score:80,desc:'Modern, fast Python web framework for building APIs with automatic documentation and validation.',reason:'Framework innovation'},
-  {name:'React',category:'Frontend',tags:['JavaScript','UI','Components'],score:78,desc:'Dominant JavaScript framework for building interactive user interfaces with component patterns.',reason:'Frontend standard'},
-  {name:'Rust',category:'Systems',tags:['Performance','Safety','Concurrency'],score:76,desc:'Systems programming language gaining adoption for its safety guarantees and performance.',reason:'Language momentum'},
-  {name:'Next.js',category:'Frontend',tags:['React','SSR','Fullstack'],score:74,desc:'React meta-framework for production applications with server-side rendering and static generation.',reason:'Framework evolution'},
-  {name:'Prisma',category:'Data',tags:['ORM','TypeScript','Database'],score:72,desc:'Type-safe database client and migration tool for modern application development.',reason:'Developer experience'},
-  {name:'Supabase',category:'Backend',tags:['Database','Auth','API'],score:70,desc:'Open-source Firebase alternative providing PostgreSQL, auth, and real-time capabilities.',reason:'Backend innovation'}
-];
-
-const $ = id => document.getElementById(id);
-const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','\'':'&#39;'}[c]));
-
 const birds = ['🐦', '🦅', '🕊️', '🦆', '🐤', '🦜', '🦢'];
 const stars = ['⭐', '✨', '🌟', '💫'];
 const particles = ['🌠', '✨', '🌟', '⚡', '💥'];
+
+// Custom cursor trail system
+class CursorTrail {
+  constructor() {
+    this.lastX = 0;
+    this.lastY = 0;
+    this.velocityX = 0;
+    this.velocityY = 0;
+    this.currentBird = birds[Math.floor(Math.random() * birds.length)];
+    this.birdEl = null;
+    this.trailCounter = 0;
+    this.lastTrailTime = 0;
+    this.init();
+  }
+
+  init() {
+    this.birdEl = document.createElement('div');
+    this.birdEl.className = 'cursor-bird';
+    this.birdEl.textContent = this.currentBird;
+    document.body.appendChild(this.birdEl);
+    
+    document.addEventListener('mousemove', (e) => this.update(e));
+  }
+
+  update(e) {
+    const x = e.clientX;
+    const y = e.clientY;
+    
+    this.velocityX = (x - this.lastX) * 0.8;
+    this.velocityY = (y - this.lastY) * 0.8;
+    
+    // Calculate rotation angle based on direction
+    const angle = Math.atan2(this.velocityY, this.velocityX) * (180 / Math.PI);
+    
+    this.birdEl.style.left = x + 'px';
+    this.birdEl.style.top = y + 'px';
+    this.birdEl.style.transform = `translate(-50%, -50%) rotate(${angle}deg) scale(${0.8 + Math.abs(this.velocityX) * 0.02})`;
+    
+    // Create trail every few pixels
+    const now = Date.now();
+    if (now - this.lastTrailTime > 20) {
+      this.createTrailDot(this.lastX, this.lastY);
+      this.lastTrailTime = now;
+      this.trailCounter++;
+      
+      // Switch bird randomly to create flock effect
+      if (this.trailCounter % 8 === 0) {
+        this.currentBird = birds[Math.floor(Math.random() * birds.length)];
+        this.birdEl.textContent = this.currentBird;
+      }
+    }
+    
+    this.lastX = x;
+    this.lastY = y;
+  }
+
+  createTrailDot(x, y) {
+    const dot = document.createElement('div');
+    dot.className = 'cursor-trail';
+    dot.style.left = x + 'px';
+    dot.style.top = y + 'px';
+    document.body.appendChild(dot);
+    
+    setTimeout(() => dot.remove(), 800);
+  }
+}
+
+// Initialize cursor trail
+let cursorTrail;
 
 function createFlyingElement(x, y, emoji, type = 'bird') {
   const el = document.createElement('div');
@@ -714,27 +799,45 @@ function createFlyingElement(x, y, emoji, type = 'bird') {
 }
 
 function renderProjects() {
-  const q = $('search').value.trim().toLowerCase();
+  const q = document.getElementById('search').value.trim().toLowerCase();
+  const projects = [
+    {name:'LLaMA',category:'AI/ML',tags:['Models','NLP','Open-Source'],score:98,desc:'Meta\'s open-source large language model enabling fine-tuning and custom AI applications at scale.',reason:'LLM democratization'},
+    {name:'Llama2',category:'AI/ML',tags:['Models','Production','Inference'],score:96,desc:'Production-grade LLM with improved safety, extended context, and commercial viability.',reason:'Enterprise AI'},
+    {name:'Kubernetes',category:'Infrastructure',tags:['Containers','Orchestration','DevOps'],score:94,desc:'Industry standard for container orchestration, service deployment, and infrastructure automation.',reason:'Proven at scale'},
+    {name:'OpenTelemetry',category:'Observability',tags:['Tracing','Metrics','Monitoring'],score:92,desc:'Unified instrumentation standard for collecting traces, metrics, and logs across systems.',reason:'Observability baseline'},
+    {name:'Terraform',category:'Infrastructure',tags:['IaC','Cloud','Automation'],score:90,desc:'Infrastructure as Code framework for provisioning and managing cloud resources declaratively.',reason:'IaC standard'},
+    {name:'PostgreSQL',category:'Data',tags:['Database','Analytics','Reliability'],score:88,desc:'Mature, open-source relational database with strong consistency, extensibility, and performance.',reason:'Data foundation'},
+    {name:'Apache Spark',category:'Data',tags:['BigData','Analytics','Processing'],score:86,desc:'Distributed computing framework for large-scale data processing and real-time analytics.',reason:'Data scale'},
+    {name:'Docker',category:'DevOps',tags:['Containers','Deployment','DevEx'],score:84,desc:'Containerization platform that remains foundational to modern development workflows.',reason:'Container standard'},
+    {name:'GitHub Actions',category:'DevEx',tags:['CI/CD','Automation','DevOps'],score:82,desc:'Native GitHub workflow automation for testing, building, and deploying applications.',reason:'DevEx momentum'},
+    {name:'FastAPI',category:'WebFramework',tags:['Python','Backend','Performance'],score:80,desc:'Modern, fast Python web framework for building APIs with automatic documentation and validation.',reason:'Framework innovation'},
+    {name:'React',category:'Frontend',tags:['JavaScript','UI','Components'],score:78,desc:'Dominant JavaScript framework for building interactive user interfaces with component patterns.',reason:'Frontend standard'},
+    {name:'Rust',category:'Systems',tags:['Performance','Safety','Concurrency'],score:76,desc:'Systems programming language gaining adoption for its safety guarantees and performance.',reason:'Language momentum'},
+    {name:'Next.js',category:'Frontend',tags:['React','SSR','Fullstack'],score:74,desc:'React meta-framework for production applications with server-side rendering and static generation.',reason:'Framework evolution'},
+    {name:'Prisma',category:'Data',tags:['ORM','TypeScript','Database'],score:72,desc:'Type-safe database client and migration tool for modern application development.',reason:'Developer experience'},
+    {name:'Supabase',category:'Backend',tags:['Database','Auth','API'],score:70,desc:'Open-source Firebase alternative providing PostgreSQL, auth, and real-time capabilities.',reason:'Backend innovation'}
+  ];
+  
   const visible = q ? projects.filter(project => {
     const haystack = [project.name, project.category, project.tags.join(' '), project.desc, project.reason].join(' ').toLowerCase();
     return haystack.includes(q);
   }) : projects;
 
-  $('projectGrid').innerHTML = visible.map((project, idx) => `
+  document.getElementById('projectGrid').innerHTML = visible.map((project, idx) => `
     <article class="card project-card">
       <div class="project-top">
         <div>
-          <div class="project-name">${esc(project.name)}</div>
-          <div class="project-area">${esc(project.category)}</div>
+          <div class="project-name">${project.name}</div>
+          <div class="project-area">${project.category}</div>
         </div>
         <div class="score-badge">${project.score}</div>
       </div>
       <div class="project-tags">
-        ${project.tags.map(tag => `<span class="tag">${esc(tag)}</span>`).join('')}
+        ${project.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
       </div>
-      <p>${esc(project.desc)}</p>
+      <p>${project.desc}</p>
       <div class="project-meta">
-        <span class="reason">${esc(project.reason)}</span>
+        <span class="reason">${project.reason}</span>
         <span class="tag">Trending</span>
       </div>
     </article>
@@ -790,21 +893,13 @@ window.addEventListener('wheel', (e) => {
   }
 }, { passive: true });
 
-// Cursor tracking with occasional particles
-document.addEventListener('mousemove', (e) => {
-  if (Math.random() > 0.98) {
-    const emoji = Math.random() > 0.6 ? birds[Math.floor(Math.random() * birds.length)] : stars[Math.floor(Math.random() * stars.length)];
-    createFlyingElement(e.clientX, e.clientY, emoji, Math.random() > 0.5 ? 'bird' : 'star');
-  }
-});
-
-$('search').addEventListener('input', renderProjects);
+document.getElementById('search').addEventListener('input', renderProjects);
 
 let likeCount = 24;
-$('like').addEventListener('click', () => {
+document.getElementById('like').addEventListener('click', function() {
   likeCount += 1;
-  $('likeCount').textContent = likeCount;
-  $('like').classList.add('pulse');
+  document.getElementById('likeCount').textContent = likeCount;
+  this.classList.add('pulse');
   
   if (synth) synth.playChord([523.25, 659.25, 783.99], 0.4, 'sine');
   
@@ -821,11 +916,12 @@ $('like').addEventListener('click', () => {
     }, i * 80);
   }
   
-  setTimeout(() => $('like').classList.remove('pulse'), 220);
+  setTimeout(() => this.classList.remove('pulse'), 220);
 });
 
 window.addEventListener('load', () => {
   synth = new AudioSynth();
+  cursorTrail = new CursorTrail();
   renderProjects();
   
   // Welcome sound on page load
